@@ -1,3 +1,3 @@
-# Commission Calculator
+# Advocate Commission Calculator
 
-A calculator tool for employee commissions.
+A calculator tool for advocate commissions.
