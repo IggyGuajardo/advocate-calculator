@@ -32,21 +32,21 @@
 
         // Main component
         const CommissionCalculator = () => {
-      const [formData, setFormData] = useState({
-              grossAddGoal: '',  // keeping default goals
-              accessoryGoal: '',  // keeping default goals
-              plans30: '',
-              plans40: '',
-              plans55: '',
-              plans60: '',
-              upgrades: '',
-              autoPayEnabled: '',
-              protectEnabled: '',
-              accessoriesValue: '',
-              grossAddsWith40Plus: '',
-              pppAccessoryRevenue: '',
-              aiaCount: ''
-});
+          const [formData, setFormData] = useState({
+            grossAddGoal: 20,
+            accessoryGoal: 500,
+            plans30: '',
+            plans40: '',
+            plans55: '',
+            plans60: '',
+            upgrades: '',
+            autoPayEnabled: '',
+            protectEnabled: '',
+            accessoriesValue: '',
+            grossAddsWith40Plus: '',
+            pppAccessoryRevenue: '',
+            aiaCount: ''
+          });
 
           const [results, setResults] = useState({
             planCommission: 0,
@@ -62,14 +62,20 @@
             performanceTier: "",
           });
 
-       const handleInputChange = (e) => {
-          const { name, value } = e.target;
-          setFormData({
-            ...formData,
-            [name]: value === '' ? '' : parseFloat(value) || 0
-  });
-};
+          const handleInputChange = (e) => {
+            const { name, value } = e.target;
+            setFormData({
+              ...formData,
+              [name]: value === '' ? '' : parseFloat(value) || 0
+            });
+          };
 
+          // Helper function to handle empty values
+          const getNumericValue = (value) => {
+            return value === '' ? 0 : parseFloat(value) || 0;
+          };
+
+          // Calculate commissions whenever form data changes
           useEffect(() => {
             calculateCommission();
           }, [formData]);
@@ -77,19 +83,20 @@
           const calculateCommission = () => {
             // Plan commissions
             const plan30Commission = 0;
-            const plan40Commission = formData.plans40 * 2;
-            const plan55Commission = formData.plans55 * 5;
-            const plan60Commission = formData.plans60 * 6;
+            const plan40Commission = getNumericValue(formData.plans40) * 2;
+            const plan55Commission = getNumericValue(formData.plans55) * 5;
+            const plan60Commission = getNumericValue(formData.plans60) * 6;
             const totalPlanCommission = plan30Commission + plan40Commission + plan55Commission + plan60Commission;
 
             // Upgrade commission
-            const upgradeCommission = formData.upgrades * 3;
+            const upgradeCommission = getNumericValue(formData.upgrades) * 3;
 
             // Total gross adds
-            const totalGrossAdds = formData.plans30 + formData.plans40 + formData.plans55 + formData.plans60;
+            const totalGrossAdds = getNumericValue(formData.plans30) + getNumericValue(formData.plans40) + 
+                                 getNumericValue(formData.plans55) + getNumericValue(formData.plans60);
             
             // Gross Add percentage of goal
-            const grossAddPercentage = (totalGrossAdds / formData.grossAddGoal) * 100;
+            const grossAddPercentage = (totalGrossAdds / getNumericValue(formData.grossAddGoal)) * 100 || 0;
 
             // Determine performance tier
             let performanceTier = "";
@@ -110,22 +117,22 @@
             }
 
             // Check if goal is reached for Auto Pay and Protect bonuses
-            const isGoalReached = grossAddPercentage >= 100 || formData.accessoriesValue >= formData.accessoryGoal;
+            const isGoalReached = grossAddPercentage >= 100 || getNumericValue(formData.accessoriesValue) >= getNumericValue(formData.accessoryGoal);
             
             // Auto Pay and Protect commissions
-            const autoPayCommission = isGoalReached ? formData.autoPayEnabled * 1 : 0;
-            const protectCommission = isGoalReached ? formData.protectEnabled * 1 : 0;
+            const autoPayCommission = isGoalReached ? getNumericValue(formData.autoPayEnabled) * 1 : 0;
+            const protectCommission = isGoalReached ? getNumericValue(formData.protectEnabled) * 1 : 0;
 
             // Accessories commission (standard 7%)
-            const baseAccessoriesCommission = formData.accessoriesValue * 0.07;
+            const baseAccessoriesCommission = getNumericValue(formData.accessoriesValue) * 0.07;
             
             // PPP commissions
-            const pppGrossAddCommission = formData.grossAddsWith40Plus * 1;
-            const pppAccessoriesCommission = formData.pppAccessoryRevenue * 0.10;
+            const pppGrossAddCommission = getNumericValue(formData.grossAddsWith40Plus) * 1;
+            const pppAccessoriesCommission = getNumericValue(formData.pppAccessoryRevenue) * 0.10;
             const totalPppCommission = pppGrossAddCommission + pppAccessoriesCommission;
 
             // AIA commission ($20 per, but not included in main total as it's paid after 90 days)
-            const aiaCommission = formData.aiaCount * 20;
+            const aiaCommission = getNumericValue(formData.aiaCount) * 20;
 
             // Calculate total commission before performance multiplier
             const subtotalCommission = totalPlanCommission + upgradeCommission + autoPayCommission + 
@@ -150,12 +157,12 @@
           };
 
           return (
-            <div className="p-4 max-w-6xl mx-auto bg-white rounded-lg shadow-lg min-h-screen flex flex-col justify-center">
-              <h1 className="text-2xl font-bold mb-4 text-center">Advocate Commission Calculator</h1>
+            <div className="p-4 max-w-6xl mx-auto bg-white rounded-lg shadow-lg">
+              <h1 className="text-2xl font-bold mb-4 text-center">Employee Commission Calculator</h1>
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                 <div className="bg-gray-100 p-3 rounded-lg">
-                  <h2 className="text-xl font-semibold mb-4">Goals</h2>
+                  <h2 className="text-lg font-semibold mb-3">Goals</h2>
                   <div className="grid grid-cols-2 gap-3 mb-3">
                     <div>
                       <label className="block text-sm font-medium mb-1">Gross Add Goal</label>
@@ -198,7 +205,7 @@
                         name="plans40"
                         value={formData.plans40}
                         onChange={handleInputChange}
-                        className="w-full p-2 border rounded"
+                        className="w-full p-1 border rounded"
                       />
                     </div>
                     <div>
@@ -223,7 +230,7 @@
                     </div>
                   </div>
 
-                  <h2 className="text-xl font-semibold mt-5 mb-3">Additional Metrics</h2>
+                  <h2 className="text-lg font-semibold mt-3 mb-2">Additional Metrics</h2>
                   <div className="grid grid-cols-3 gap-2">
                     <div>
                       <label className="block text-xs font-medium mb-1">Upgrades</label>
