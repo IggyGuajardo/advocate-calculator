@@ -32,21 +32,21 @@
 
         // Main component
         const CommissionCalculator = () => {
-          const [formData, setFormData] = useState({
-            grossAddGoal: ,
-            accessoryGoal: ,
-            plans30: ,
-            plans40: ,
-            plans55: ,
-            plans60: ,
-            upgrades: ,
-            autoPayEnabled: ,
-            protectEnabled: ,
-            accessoriesValue: ,
-            grossAddsWith40Plus: ,
-            pppAccessoryRevenue: ,
-            aiaCount: 
-          });
+      const [formData, setFormData] = useState({
+              grossAddGoal: '',  // keeping default goals
+              accessoryGoal: '',  // keeping default goals
+              plans30: '',
+              plans40: '',
+              plans55: '',
+              plans60: '',
+              upgrades: '',
+              autoPayEnabled: '',
+              protectEnabled: '',
+              accessoriesValue: '',
+              grossAddsWith40Plus: '',
+              pppAccessoryRevenue: '',
+              aiaCount: ''
+});
 
           const [results, setResults] = useState({
             planCommission: 0,
@@ -62,13 +62,13 @@
             performanceTier: "",
           });
 
-          const handleInputChange = (e) => {
-            const { name, value } = e.target;
-            setFormData({
-              ...formData,
-              [name]: parseFloat(value) || 0
-            });
-          };
+       const handleInputChange = (e) => {
+          const { name, value } = e.target;
+          setFormData({
+            ...formData,
+            [name]: value === '' ? '' : parseFloat(value) || 0
+  });
+};
 
           useEffect(() => {
             calculateCommission();
