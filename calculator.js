@@ -1,4 +1,4 @@
-const { useState, useEffect } = React;
+import React, { useState, useEffect } from 'react';
 
 const CommissionCalculator = () => {
   const [formData, setFormData] = useState({
@@ -120,35 +120,37 @@ const CommissionCalculator = () => {
   };
 
   return (
-    <div className="p-6 max-w-4xl mx-auto bg-white rounded-lg shadow-lg">
-      <h1 className="text-2xl font-bold mb-6 text-center">Employee Commission Calculator</h1>
+    <div className="p-4 max-w-6xl mx-auto bg-white rounded-lg shadow-lg">
+      <h1 className="text-2xl font-bold mb-4 text-center">Employee Commission Calculator</h1>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div className="bg-gray-100 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-4">Goals</h2>
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Gross Add Goal</label>
-            <input
-              type="number"
-              name="grossAddGoal"
-              value={formData.grossAddGoal}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-          <div className="mb-4">
-            <label className="block text-sm font-medium mb-1">Accessory Goal ($)</label>
-            <input
-              type="number"
-              name="accessoryGoal"
-              value={formData.accessoryGoal}
-              onChange={handleInputChange}
-              className="w-full p-2 border rounded"
-            />
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="bg-gray-100 p-3 rounded-lg">
+          <h2 className="text-lg font-semibold mb-3">Goals</h2>
+          <div className="grid grid-cols-2 gap-3 mb-3">
+            <div>
+              <label className="block text-sm font-medium mb-1">Gross Add Goal</label>
+              <input
+                type="number"
+                name="grossAddGoal"
+                value={formData.grossAddGoal}
+                onChange={handleInputChange}
+                className="w-full p-1 border rounded"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium mb-1">Accessory Goal ($)</label>
+              <input
+                type="number"
+                name="accessoryGoal"
+                value={formData.accessoryGoal}
+                onChange={handleInputChange}
+                className="w-full p-1 border rounded"
+              />
+            </div>
           </div>
 
-          <h2 className="text-xl font-semibold mt-6 mb-4">Plans</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <h2 className="text-lg font-semibold mt-3 mb-2">Plans</h2>
+          <div className="grid grid-cols-2 gap-3">
             <div>
               <label className="block text-sm font-medium mb-1">$30 Plans</label>
               <input
@@ -156,7 +158,7 @@ const CommissionCalculator = () => {
                 name="plans30"
                 value={formData.plans30}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-1 border rounded"
               />
             </div>
             <div>
@@ -166,7 +168,7 @@ const CommissionCalculator = () => {
                 name="plans40"
                 value={formData.plans40}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-1 border rounded"
               />
             </div>
             <div>
@@ -176,7 +178,7 @@ const CommissionCalculator = () => {
                 name="plans55"
                 value={formData.plans55}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-1 border rounded"
               />
             </div>
             <div>
@@ -186,90 +188,90 @@ const CommissionCalculator = () => {
                 name="plans60"
                 value={formData.plans60}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-1 border rounded"
               />
             </div>
           </div>
 
-          <h2 className="text-xl font-semibold mt-6 mb-4">Additional Metrics</h2>
-          <div className="grid grid-cols-2 gap-4">
+          <h2 className="text-lg font-semibold mt-3 mb-2">Additional Metrics</h2>
+          <div className="grid grid-cols-3 gap-2">
             <div>
-              <label className="block text-sm font-medium mb-1">Upgrades</label>
+              <label className="block text-xs font-medium mb-1">Upgrades</label>
               <input
                 type="number"
                 name="upgrades"
                 value={formData.upgrades}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-1 border rounded"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Auto Pay</label>
+              <label className="block text-xs font-medium mb-1">Auto Pay</label>
               <input
                 type="number"
                 name="autoPayEnabled"
                 value={formData.autoPayEnabled}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-1 border rounded"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Protect</label>
+              <label className="block text-xs font-medium mb-1">Protect</label>
               <input
                 type="number"
                 name="protectEnabled"
                 value={formData.protectEnabled}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-1 border rounded"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">Accessory Revenue ($)</label>
+              <label className="block text-xs font-medium mb-1">Accessory Revenue ($)</label>
               <input
                 type="number"
                 name="accessoriesValue"
                 value={formData.accessoriesValue}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-1 border rounded"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">PPP Activations with $40+ Plans</label>
+              <label className="block text-xs font-medium mb-1">PPP Activations $40+</label>
               <input
                 type="number"
                 name="grossAddsWith40Plus"
                 value={formData.grossAddsWith40Plus}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-1 border rounded"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">PPP Accessory Revenue ($)</label>
+              <label className="block text-xs font-medium mb-1">PPP Accessory Rev ($)</label>
               <input
                 type="number"
                 name="pppAccessoryRevenue"
                 value={formData.pppAccessoryRevenue}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-1 border rounded"
               />
             </div>
             <div>
-              <label className="block text-sm font-medium mb-1">AIA Count</label>
+              <label className="block text-xs font-medium mb-1">AIA Count</label>
               <input
                 type="number"
                 name="aiaCount"
                 value={formData.aiaCount}
                 onChange={handleInputChange}
-                className="w-full p-2 border rounded"
+                className="w-full p-1 border rounded"
               />
             </div>
           </div>
         </div>
 
-        <div className="bg-blue-50 p-4 rounded-lg">
-          <h2 className="text-xl font-semibold mb-4">Commission Calculation</h2>
+        <div className="bg-blue-50 p-3 rounded-lg">
+          <h2 className="text-lg font-semibold mb-2">Commission Calculation</h2>
           
-          <div className="mb-6">
+          <div className="mb-3">
             <div className="bg-blue-100 p-3 rounded-lg mb-2">
               <div className="flex justify-between font-semibold">
                 <span>Gross Add Goal Completion:</span>
@@ -282,7 +284,7 @@ const CommissionCalculator = () => {
             </div>
           </div>
           
-          <div className="space-y-2 mb-6">
+          <div className="space-y-1 mb-3">
             <div className="flex justify-between">
               <span>Plan Commission:</span>
               <span>${results.planCommission.toFixed(2)}</span>
@@ -337,5 +339,4 @@ const CommissionCalculator = () => {
   );
 };
 
-// Render the calculator component into the root div
-ReactDOM.render(<CommissionCalculator />, document.getElementById('root'));
+export default CommissionCalculator;
