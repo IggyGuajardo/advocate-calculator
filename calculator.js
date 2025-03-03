@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
+// Access React methods from global object
+const { useState, useEffect } = React;
 
+// Main component
 const CommissionCalculator = () => {
   const [formData, setFormData] = useState({
     grossAddGoal: 20,
@@ -39,7 +41,6 @@ const CommissionCalculator = () => {
     });
   };
 
-  // Calculate commissions whenever form data changes
   useEffect(() => {
     calculateCommission();
   }, [formData]);
@@ -339,4 +340,5 @@ const CommissionCalculator = () => {
   );
 };
 
-export default CommissionCalculator;
+// Render component
+ReactDOM.render(<CommissionCalculator />, document.getElementById('root'));
